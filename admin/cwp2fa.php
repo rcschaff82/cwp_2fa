@@ -107,7 +107,7 @@ case "createGAuthSecret":
                                 // Create GoogleAuth object
                     $gauth = new GoogleAuthenticator();
                     $secret = $gauth->createSecret();
-                if (file_put_contents($file, $secret)) { //echo $userName:$secret >> /etc/twofactor) {
+                if (file_put_contents($file, $secret)) {
                                 // Create the QRCode as PNG image
                         $randomString = bin2hex(openssl_random_pseudo_bytes (15));
                         $qrcodeimg = "/tmp/".$randomString.".png";
