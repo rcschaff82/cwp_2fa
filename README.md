@@ -11,8 +11,8 @@ Please not that this system works around the CWP login system, and therefore is 
 
 TO install:
 From root user via ssh:
-
-cd cwp_2fa/
+wget -O - https://github.com/rcschaff82/cwp_2fa/tarball/master | tar xz
+cd rcschaff82-cwp_2fa-*
 ./install.sh
 When prompted, put in your API key
 That's it. 
