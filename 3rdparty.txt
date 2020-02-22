@@ -1,0 +1,28 @@
+<noscript>
+</ul>
+<li class="custom-menu"> <!-- this class "custom-menu" was added so you can remove the Developer Menu easily if you want -->
+    <a class="hasUl" href="#"><span class="icon16 icomoon-icon-lock"></span>2Factor Auth<span class="hasDrop icon16 icomoon-icon-arrow-down-2"></span></a>
+    <ul class="sub">
+<li><a href="index.php?module=cwp2fa"><span class="icon16 icomoon-icon-arrow-right-3"></span>ROOT 2FA</a></li>
+<li><a href="index.php?module=user2fa"><span class="icon16 icomoon-icon-arrow-right-3"></span>Manage Users</a></li>
+</ul>
+</li>
+<li style="display:none;"><ul>
+</noscript>
+<script type="text/javascript">
+        $(document).ready(function() {
+                var newButtons = ''
+                +' <li>'
+                +' <a href="#" class="hasUl"><span aria-hidden="true" class="icon16 icomoon-icon-lock"></span>2Factor Auth<span class="hasDrop icon16 icomoon-icon-arrow-down-2"></span></a>'
+                +'      <ul class="sub">'
+                +'              <li><a href="?module=cwp2fa"><span class="icon16 icomoon-icon-arrow-right-3"></span>ROOT 2FA</a></li>'
+                +'              <li><a href="?module=user2fa"><span class="icon16 icomoon-icon-arrow-right-3"></span>Manage Users</a></li>'
+                +'      </ul>'
+                +'</li>';
+                $("li#mn-3").before(newButtons);
+        });
+</script>
+
+
+
+<script type='text/javascript'>$(document).ready(function(){$(".custom-menu").prev("LI").css("display","none");});</script>

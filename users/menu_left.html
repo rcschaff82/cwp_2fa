@@ -1,0 +1,402 @@
+<li class="nav-header">
+    <div class="dropdown profile-element" style="width: 100%">
+        <span>
+            <a href="?">
+                {% if mod.reseller ==1 %}
+                    {% if mod.logoreseller !='' %}
+                        <img alt="" id="logomenu" src="https://{{mod.domain_username}}/reseller/img/{{mod.logoreseller}}" width="200" style="margin-right: 15px"/></a>
+                    {% else %}
+                        <img alt="" id="logomenu"  src="{{url}}/img/cwp_logo.png" width="200" style="margin-right: 15px"/></a>
+                    {% endif%}
+                {% elseif mod.reseller !='' %}
+                    {% if mod.logoreseller !='' %}
+                        <img alt="" id="logomenu" src="https://{{mod.domainreseller}}/reseller/img/logoreseller.png" width="200" style="margin-right: 15px"/></a>
+                    {% else %}
+                        <img alt="" id="logomenu" src="{{url}}/img/cwp_logo.png" width="200" style="margin-right: 15px"/></a>
+                    {% endif%}
+                {% else %}
+                    <img alt="" id="logomenu" src="{{url}}/img/cwp_logo.png" width="200" style="margin-right: 15px"/></a>
+                {% endif%}
+            </span>
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><i class="fa fa-user" aria-hidden="true"></i> {{users}}</strong>
+                             </span> <span class="text-muted text-xs block">{{langene.MOD_TITTLE_SETTING}} <b class="caret"></b></span> </span> </a>
+        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+            <li><a href="#" data-toggle="modal"  data-target="#modal-changepass">{{langene.CHANGEPASS}}</a></li>
+            <li><a href="#" data-toggle="modal"  data-target="#modal-settings">{{langene.GNLABLE10}}</a></li>
+            <li class="divider"></li>
+            <li><a href="#" class="logon">{{langene.BTN_LOGOUT}}</a></li>
+        </ul>
+    </div>
+    <div class="logo-element">
+        CWP
+    </div>
+</li>
+<li class="active">
+    <a href="?"><i class="fa fa-th-large"></i> <span class="nav-label">{{langene.TITLE}}</span></a>
+</li>
+{% if (("crontab" in rmenu )or("process_list" in rmenu )or("phpini_editor" in rmenu )or(menu.cloudlinux ==1 )or(menu.notification_center ==1 )or(menu.cloudlinux ==1 )or(menu.phpselector ==1 ))or(swmenu==1) %}
+<li class="searchmenu">
+    <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">{{langene.CWPSETTING}}</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        {% if ("crontab" in rmenu )or(swmenu==1) %}
+            <li class="search"><a href="?module=crontab">{{langene.CRON}}</a></li>
+        {% endif %}
+        {% if ("process_list" in rmenu )or(swmenu==1) %}
+            <li class="search"><a href="#"data-toggle="modal" data-target="#modalprocesslist"  class="mod_process_list">{{langene.PROCESSLIST}}</a></li>
+        {% endif %}
+        {% if ("phpini_editor" in rmenu )or(swmenu==1) %}
+            <li class="search" id="phpiniid"><a href="?module=phpini_editor">{{langene.PHPINI}}</a></li>
+        {% endif %}
+        {% if ("phpselector" in rmenu )or(swmenu==1) %}
+            <li class="search"><a href="?module=phpselector">{{langene.GNLABEL50}}</a></li>
+        {% endif %}
+        {% if menu.cloudlinux ==1 %}
+            <li class="search"><a href="?module=php_selector">{{langene.PHPSELECTOR}}</a></li>
+        {% endif %}
+        {% if ("notification_center" in rmenu )or(swmenu==1) %}
+            <li class="search"><a href="?module=notification_center">{{langene.BTNOTITITLE}}</a></li>
+        {% endif %}
+        {% if ("statistics" in rmenu )or(swmenu==1) %}
+        <li class="search"><a href="?module=statistics">{{langene.GNLABEL51}}</a></li>
+        {% endif %}
+	<li class="search"><a href="?module=user2fa">2FA Module</a></li>
+    </ul>
+</li>
+{% endif %}
+{% if (("files_system_lock" in rmenu )or("clam" in rmenu )or("fileManager2" in rmenu )or("ftp_accounts" in rmenu )or("backups" in rmenu )or ("protected_directory" in rmenu ))or(swmenu==1) %}
+<li class="searchmenu">
+    <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">{{langene.FILEM}}</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        {% if ("files_system_lock" in rmenu )or(swmenu==1) %}
+        <li class="search"><a href="#" class="files_system_lock">{{langene.FILESYST}}</a></li>
+        {% endif %}
+        {% if ("clam" in rmenu )or(swmenu==1) %}
+        <li class="search"><a href="#" id="clam" class="clam">{{langene.ANTIVI}}</a></li>
+        {% endif %}
+        {% if ("file_manager" in rmenu )or(swmenu==1) %}
+        <li class="search"><a href="fileManager2.php" target="_blank">{{langene.FTPFILE}}</a></li>
+        {% endif %}
+        {% if ("ftp_accounts" in rmenu )or(swmenu==1) %}
+        <li class="search"><a href="?module=ftp_accounts">{{langene.FTPACC}}</a></li>
+        {% endif %}
+        {% if ("backups" in rmenu )or(swmenu==1) %}
+        <li class="search"><a href="?module=backups">{{langene.BACKUP}}</a></li>
+        {% endif %}
+        {% if (apache==1)%}
+            {% if ("protected_directory" in rmenu )or(swmenu==1) %}
+                <li class="search"><a href="?module=protected_directory">{{langene.DIRPROTE}}</a></li>
+            {% endif %}
+        {% endif %}
+        {% if ("error_log" in rmenu )or(swmenu==1) %}
+        <li class="search"><a href="?module=error_log">{{langene.GNLABEL52}}</a></li>
+        {% endif %}
+    </ul>
+</li>
+{% endif %}
+
+{% if ("domains" in rmenu )or("subdomains" in rmenu )or("letsencrypt" in rmenu )or("vdomaincache" in rmenu )or(swmenu==1) %}
+<li class="searchmenu">
+    <a href="#"><i class="fa fa-globe"></i> <span class="nav-label">{{langene.DOMAINS}}</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        <li class="search"><a href="?module=domains">{{langene.DOMAINS}}</a></li>
+        {% if ("subdomains" in rmenu )or(swmenu==1) %}
+        <li class="search"><a href="?module=subdomains">{{langene.SUBDOMAIN}}</a></li>
+        {% endif %}
+        {% if ("letsencrypt" in rmenu )or(swmenu==1) %}
+        <li class="search"><a href="?module=letsencrypt">{{langene.AUTOSSL}}</a></li>
+        {% endif %}
+        {% if mod.varnish==1 %}
+            {% if ("vdomaincache" in rmenu )or(swmenu==1) %}
+            <li class="search"><a href="?module=vdomaincache">{{langene.CACHE1}}</a></li>
+            {% endif %}
+        {% endif %}
+    </ul>
+</li>
+{% endif %}
+
+{% if ("mysql_manager" in rmenu ) or ("posgresql_manager" in rmenu ) or(swmenu==1) %}
+<li class="searchmenu">
+    <a href="#"><i class="fa fa-database"></i> <span class="nav-label">{{langene.SQLSERV}}</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        <!--li class="search"><a  href="{{mod.pma}}" target="_blank">{{langene.PHPMYADMIN}}</a></li-->
+        <li class="search"><a  href="?module=pma" target="_blank">{{langene.PHPMYADMIN}}</a></li>
+        <li class="search"><a href="?module=mysql_manager">{{langene.MANAGERMYSQL}}</a></li>
+        <li class="search"><a href="#" id="mysql_processes" class="mysql_processes">{{langene.SHOWMYSQL}}</a></li>
+        {% if (postgres==1) %}
+            {% if ("posgresql_manager" in rmenu ) or (swmenu==1) %}
+                <li><a href="?module=postgresql_manager">{{langene.MANAGERPOSGRE}}</a></li>
+            {% endif %}
+        {% endif %}
+    </ul>
+</li>
+{% endif %}
+
+
+{% if ("email_accounts" in rmenu )or("mail_autoreply" in rmenu ) or("roundcube" in rmenu ) or (swmenu==1) %}
+<li class="searchmenu">
+    <a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">{{langene.MAILACCOUNT}}</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        {% if ("email_accounts" in rmenu )or(swmenu==1) %}
+        <li class="search"><a href="?module=email_accounts">{{langene.MAILACCOUNT}}</a></li>
+        {% endif %}
+        {% if ("mail_autoreply" in rmenu ) or (swmenu==1) %}
+        <li class="search"><a href="?module=mail_autoreply">{{langene.AUTORESPONDER}}</a></li>
+        {% endif %}
+        {% if ("roundcube" in rmenu ) or (swmenu==1) %}
+        <li class="search"><a href="{{mod.roundcube}}" target="_blank">{{langene.ROUNDCUBE}}</a></li>
+        {% endif %}
+        {% if ("mail_routing" in rmenu ) or (swmenu==1) %}
+        <li class="search"><a href="?module=mail_routing">{{langene.DASWER}}</a></li>
+        {% endif %}
+        {% if mod.spamexperts ==1 %}
+        <li class="search"><a href="?module=spamexperts">{{langene.GNLABEL45}}</a></li>
+        {% endif %}
+
+    </ul>
+</li>
+{% endif %}
+{% if ("dns_zone_editor" in rmenu )or(swmenu==1) %}
+<li class="searchmenu">
+    <a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">{{langene.DNS}} </span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        <li class="search"><a href="?module=dns_zone_editor">{{langene.DNSZONEEDITOR}}</a></li>
+    </ul>
+</li>
+{% endif %}
+
+{% if ("addons" in rmenu )or(swmenu==1) %}
+<li class="searchmenu">
+    <a href="#"><i class="fa fa-bank"></i> <span class="nav-label">{{langene.ADDONS}}</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        <li class="search"><a href="?module=addons&acc=filemanager">{{langene.ASSMOD_EXPLO}}</a></li>
+        <li class="search"><a href="?module=addons&acc=wordpress">{{langene.ASSMOD_WP}}</a></li>
+        <li class="search"><a href="?module=addons&acc=prestashop">{{langene.ASSMOD_PS}}</a></li>
+        <li class="search"><a href="?module=addons&acc=joomla">{{langene.ASSMOD_JL}}</a></li>
+        <li class="search"><a href="?module=addons&acc=drupal">{{langene.ASSMOD_DP}}</a></li>
+    </ul>
+</li>
+{% endif %}
+{% if (("softaculous" in rmenu )or("fantastico_f3" in rmenu ) or(mod.sitepad in rmenu )) or ((softmenu==1) or (fant3menu==1) or (mod.sitepad==1))%}
+
+<li class="searchmenu">
+    <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">{{langene.SCRIPTINST}}</span></a>
+    <ul class="nav nav-second-level collapse">
+        {% if(softmenu==1) %}
+            {% if ("softaculous" in rmenu )or(swmenu==1) %}
+                <li class="search"><a href="?module=softaculous">{{langene.SOFTAC}}</a></li>
+            {% endif %}
+        {% endif %}
+        {% if(mod.sitepad==1) %}
+            {% if ("sitepad" in rmenu )or(swmenu==1) %}
+                <li class="search"><a href="?module=sitepad">{{langene.GNLABEL46}}</a></li>
+            {% endif %}
+        {% endif %}
+        {% if(fant3menu==1) %}
+            <li class="search"><a href="?module=fantastico_f3&path=?/">{{langene.FANTASTICO}}</a></li>
+        {% endif %}
+    </ul>
+</li>
+{% endif %}
+{% if mod.reseller ==1%}
+<li class="searchmenu">
+    <a href="#"><i class="fa fa-recycle"></i> <span class="nav-label">{{langene.GNLABEL37}}</span></a>
+    <ul class="nav nav-second-level collapse">
+        <li class="search">
+            <a href="?module=reseller"><span class="nav-label">{{langene.GNLABEL43}}</span></a>
+        </li>
+    </ul>
+</li>
+
+{% endif %}
+
+<li  class="active2 menugrande">
+    <a href="#" ><i class="fa fa-tasks"></i> <span class="nav-label">{{langene.USERDD}}</span></a>
+</li>
+<li class="menugrande">
+    <div class="ibox">
+        {% set porhome=(100/mod.packquota)*mod.sizehome %}
+        {% if porhome <50 %}
+            {% set barhome='progress-bar-success' %}
+        {% elseif porhome <=75 %}
+            {% set barhome='progress-bar-warning' %}
+        {% else %}
+            {% set barhome='progress-bar-danger' %}
+        {% endif %}
+        {% set pormysql=(100/mod.packquota)*mod.sizemysql %}
+
+        {% set porbandwidth=(100/mod.pack_bandwidth)*mod.bandwidth %}
+        {% if porbandwidth =='INF' %}
+            {% set porbandwidth=0 %}
+        {% endif %}
+        {% if porbandwidth <50 %}
+        {% set barbandwidth='progress-bar-success' %}
+        {% elseif porbandwidth <=75 %}
+        {% set barbandwidth='progress-bar-warning' %}
+        {% else %}
+        {% set barbandwidth='progress-bar-danger' %}
+        {% endif %}
+
+        {% set pormail=(100/mod.packquota)*mod.sizemail %}
+        {% set totalhost=mod.packquotaused %}
+        {% set backup=(100/mod.packquota)*mod.backup_quota %}
+        {% set portotal=100/mod.packquota*totalhost %}
+        {% if portotal <50 %}
+            {% set bartotal='progress-bar-success' %}
+        {% elseif portotal <=75 %}
+            {% set bartotal='progress-bar-warning' %}
+        {% else %}
+            {% set bartotal='progress-bar-danger' %}
+        {% endif %}
+        <div class="ibox-content2">
+            <h5 style="color: white">{{langene.GNLABEL47}}</h5>
+            <h3>{{portotal|round}}%</h3>
+            <div class="progress progress-mini">
+                <div style="width: {{portotal|round}}%;" class="progress-bar"></div>
+            </div>
+            <div class="stat text-center"><h4>
+            </h4><small>{{totalhost|number_format(2, '.', ',')}} MB / {{mod.packquota|round}} MB</small></div>
+
+
+            <h5 style="color: white">{{langene.GNLABEL48}}</h5>
+            <h3>{{porbandwidth|round}}%</h3>
+            <div class="progress progress-mini">
+                <div style="width: {{porbandwidth|round}}%;" class="progress-bar {{barbandwidth}}"></div>
+            </div>
+            <div class="stat text-center"><h4>
+            </h4><small>{{mod.bandwidth|number_format(0, '.', ',')}} MB / {{mod.pack_bandwidth|number_format(0, '.', ',')}} MB</small></div>
+
+            <h5 style="color: white; padding-top: 15px">{{langene.GNLABEL49}}</h5>
+            <div style="margin-top: 5px; margin-bottom: -5px" class="col-lg-12 text-center">
+                <a href="#" id="storage"><i id="sw" class="fa fa-sort-desc"></i></a>
+            </div>
+            <div id="divstorage" style="display: none">
+                <div class="content clearfix">
+                    <i class="fa fa-folder-open"></i>
+                    <div class="progress  progress-mini">
+                        <div class="progress-bar progress-bar-success" id="bp-home" style="width: 0%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="percent pull-right" id="pullhome"></span>
+                    <div class="stat text-center">
+                        <small id="stat-home"></small>
+                    </div>
+                </div>
+                <div class="content clearfix" style="margin-top: 5px">
+                    <i class="fa fa-envelope-open"></i>
+                    <div class="progress  progress-mini">
+                        <div class="progress-bar progress-bar-success" id="bp-email" style="width: 0%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="percent pull-right" id="pullemail"></span>
+                    <div class="stat text-center" >
+                        <small id="stat-email"></small>
+                    </div>
+                </div>
+                <div class="content clearfix" style="margin-top: 5px">
+                    <i class="fa fa-database"></i>
+                    <div class="progress  progress-mini">
+                        <div class="progress-bar progress-bar-success" id="bp-mysql" style="width: 0%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="percent pull-right" id="pullmysql"></span>
+                    <div class="stat text-center">
+                        <small id="stat-mysql"></small>
+                    </div>
+                </div>
+                <div class="content clearfix" style="margin-top: 5px">
+                    <i class="fa fa-upload"></i>
+                    <div class="progress  progress-mini">
+                        <div class="progress-bar progress-bar-success" id="bp-backup" style="width: 0%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="percent pull-right" id="pullbackup"></span>
+                    <div class="stat text-center" >
+                        <small id="stat-backup"></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>
+<li  class="active2 menugrande">
+    <a href="#" ><i class="fa fa-tint"></i> <span class="nav-label">{{langene.APPLI}}</span></a>
+</li>
+<li class="menugrande">
+    <div class="ibox">
+        <div class="ibox-content2">
+            <div>
+                <div class="row">
+                    <div class="nav-label"><h5 style="color: white">Apache:</h5></div>
+                    <div style="margin-left: 5px">{{mod.infoserver.apache}}</div>
+                </div>
+                <div class="row">
+                    <div class="nav-label"><h5 style="color: white">PHP:</h5></div>
+                    <div style="margin-left: 5px">{{mod.infoserver.php}}</div>
+                </div>
+                <div class="row">
+                    <div class="nav-label"><h5 style="color: white">MySQL:</h5></div>
+                    <div style="margin-left: 5px">{{mod.infoserver.mysql}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>
+
+<li  class="active2 menugrande">
+    <a href="#" ><i class="fa fa-question-circle"></i> <span class="nav-label">{{langene.SISTEMINFO}}</span></a>
+</li>
+<li class="menugrande">
+    <div class="ibox">
+        <div class="ibox-content2">
+            <table class="table table-stripped small">
+                <tbody>
+                <tr>
+                    <td class="no-borders" style="color: #ffffff">
+                        <h5 style="color: white">DN:</h5>
+                    </td>
+                    <td class="no-borders" style="color: #ffffff">
+                        {{mod.infoserver.distri}}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color: #ffffff">
+                        <h5 style="color: white">KV:</h5>
+                    </td>
+                    <td style="color: #ffffff">
+                        {{mod.infoserver.kernel}}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color: #ffffff">
+                        <h5 style="color: white">PL:</h5>
+                    </td>
+                    <td style="color: #ffffff">
+                        {{mod.infoserver.plataform}}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color: #ffffff">
+                        <h5 style="color: white">UP:</h5>
+                    </td>
+                    <td style="color: #ffffff">
+                        {{mod.infoserver.uptime}}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color: #ffffff">
+                        <h5 style="color: white">ST:</h5>
+                    </td>
+                    <td style="color: #ffffff">
+                        {{mod.dayhour}}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color: #ffffff">
+                        <h5 style="color: white">Ver:</h5>
+                    </td>
+                    <td style="color: #ffffff">
+                        3.20
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</li>

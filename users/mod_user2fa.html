@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1>{{langmod.LABEL1}}</h1>
+    </div>
+    <div>
+<style>
+.blackOut {
+    position: absolute;
+    top:0px;
+    left:0px;
+    z-index: 5;
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,.8);
+    text-align:center;
+}
+span.boxWrapper{
+	margin-top:60px !important;
+	border: solid;
+	border-width: 1px;
+	border-radius: 3px;
+	padding: 10px;
+	background-color: #ffffff;
+	display:block;
+    width:640px;
+    height:480px;
+	margin:0 auto;
+     z-index:8;
+}
+.box {
+    margin-left:auto;
+    margin-right:auto;
+    vertical-align:center;
+    z-index:8;
+}
+</style>
+
+<form id="userAction" action="index.php?module=user2fa" method="post">
+<input type="hidden" name="username" value="nomatter">
+{% if mod.notset == false %}
+<button type="submit" name="action" value="showQRCode" class="btn btn-primary"><span style="color:white" class="fa fa-qrcode"></span> Show QR code</button>
+<button type="submit" name="action" value="toggleAuth{{mod.oo}}" class="btn btn-primary"><span style="color:white" class="fa fa-lock"></span> Use Auth [{{mod.onoff}}]</button>
+<button onclick="return confirmGAScrt('nomatter');" type="submit" name="action" value="renewGAuthSecret" class="btn btn-primary "><span style="color:white" class="fa fa-refresh"></span> <span style="color:white" class="fa fa-key"></span> Renew Secret</button>
+{% else %}
+<button type="submit" name="action" value="createGAuthSecret" class="btn btn-primary "><span style="color:white" class="fa fa-refresh"></span> <span style="color:white" class="fa fa-key"></span> Create Secret</button>
+{% endif %}
+</form>
+
+<script>
+function confirmDelete(username) {
+	return (confirm("You're about to delete your key.\nAre you SURE ?"));
+}
+
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+
+    </div>
+</div>
