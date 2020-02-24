@@ -9,6 +9,9 @@ After installation, make sure you change User Account -> Themes to the modified 
 
 Please not that this system works around the CWP login system, and therefore is not infallible, though I did my best to hide that it's there.
 
+Here is a video demonstrating the Module: https://www.youtube.com/watch?v=Uc9pglbZo6I
+If you would like to donate to the project, I accept donations at: https://paypal.me/rcschaff
+
 TO install:
 From root user via ssh:
 
