@@ -64,6 +64,7 @@ done
 sed -i "s@API_KEY@$apikey@g" /usr/local/cwpsrv/htdocs/resources/admin/modules/user2fa.php
 clear
 setenforce 1
+/root/watch.sh
 clear
 echo "Don't forget to change your users Theme Settings User Acounts->Features,Themes,Languages [Themes]"
 echo "Please set your proper timezone using 'timedatectl set-timezone (Time Zone)'"
