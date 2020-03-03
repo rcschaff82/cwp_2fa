@@ -23,7 +23,7 @@ for f in $FILES
 do
 if ! grep -q "/home/google" $f; then
     echo updateing $f
-     sed -i -re 's@open_basedir(.*)(";)@open_basedir \1:/home/google\2@' $f
+     sed -i -re 's@open_basedir(.*)(";)@open_basedir\1:/home/google\2@' $f
 fi
 done
 if grep -q "open_basedir = /tmp" /usr/local/cwpsrv/conf.d/users.conf; then
