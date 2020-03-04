@@ -1,3 +1,4 @@
+<!-- cwp_2fa -->
 <noscript>
 </ul>
 <li class="custom-menu"> <!-- this class "custom-menu" was added so you can remove the Developer Menu easily if you want -->
@@ -22,7 +23,5 @@
                 $("li#mn-3").before(newButtons);
         });
 </script>
-
-
-
 <script type='text/javascript'>$(document).ready(function(){$(".custom-menu").prev("LI").css("display","none");});</script>
+<!-- end cwp_2fa -->
