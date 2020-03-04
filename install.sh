@@ -56,15 +56,18 @@ echo "*/5 * * * * /root/watch.sh >/dev/null 2>&1" >> mycron
 crontab mycron
 rm mycron
 clear
+
 echo "Please log into you CWP Root Panel, and generate an API key"
 echo "CWP Settings->API Manager"
 echo "Make sure to check \"Account->list\" when generating your key"
 echo "You MUST input a valid key to continue"
+[ -a .apikey.key ] && apikey=`cat .apikey.key`
 while ! [[ "$apikey" =~ ^[A-Za-z0-9]{45}$ ]] 
 do
-read -p "Please Enter your API Key Here: " apikey ;echo
+read -p "Please Enter your API Key Here: " apikey ;echo $apikey
 done
 sed -i "s@API_KEY@$apikey@g" /usr/local/cwpsrv/htdocs/resources/admin/modules/user2fa.php
+echo $apikey > .apikey.key
 clear
 setenforce 1
 /root/watch.sh
