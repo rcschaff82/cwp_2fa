@@ -17,6 +17,7 @@ $fa2="";
 $loginError="";
 $userName = !empty($_POST['username'])?htmlentities($_POST['username'], ENT_QUOTES):"";
 $userPasswd = !empty($_POST['password'])?htmlentities($_POST['password'], ENT_QUOTES):"";
+$userPasswd = htmlspecialchars_decode($userPasswd, ENT_COMPAT);
 $authCode = !empty($_POST['authCode'])?htmlentities($_POST['authCode'], ENT_QUOTES):"";
 $commit = !empty($_POST['commit'])?htmlentities($_POST['commit'], ENT_QUOTES):"";
 $passwdFile='/etc/shadow';
