@@ -14,6 +14,7 @@ cp -f index.php abcdefg.php
 cp -f login.php index.php
 chattr +i *
 chattr +i .
+rsync -zavp /usr/local/cwpsrv/var/services/users/cwp_theme/original/ /usr/local/cwpsrv/var/services/users/cwp_theme/modified/
 }
 check_configs()
 {
