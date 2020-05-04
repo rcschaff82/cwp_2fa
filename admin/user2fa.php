@@ -2,23 +2,13 @@
 <h3>You can only turn it on or off.</h3>
 
 <?php
-//use API to get list of users
-$data = array("key" => "API_KEY","action"=>'list');
-$url = "https://{$_SERVER['SERVER_NAME']}:2304/v1/account";
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-curl_setopt ($ch, CURLOPT_POST, 1);
-$response = curl_exec($ch);
-curl_close($ch);
-$response = json_decode($response);
-$users = array();
-foreach ($response->msj as $key) {
-           $users[] = $key->username  ."\n";
-       }
+$sql="select username from user";
+$resp=mysqli_query($mysql_conn,$sql);
+$servers = array();
+while($row = mysqli_fetch_assoc($resp)) {
+//$servers[$row['port']] = array("port"=>$row['port'], "user"=>$row['user'],"conf"=>$row['config']);
+$users[] = $row['username']  ."\n";
+}
 ?>
 <table class="table table-striped table-bordered table-condensed table-hover" style="width:300px">
 <thead>
