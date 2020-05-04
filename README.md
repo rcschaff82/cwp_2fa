@@ -29,3 +29,7 @@ Now log into CWP and you should see a new menu 2Factor Auth directly under Serve
 
 
 Users Menu Appears under CWP Settings
+
+
+Change Log:
+5/4/2020 - Added Uninstall Script 
