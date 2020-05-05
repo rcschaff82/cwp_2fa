@@ -1,9 +1,15 @@
 #!/bin/bash
+find /home/*/.conf/cwp.ini -exec sed -i "s@modified@original@g" {} +
+version=$(grep -oP "version.*\"\K(.*)\"" /usr/local/cwpsrv/htdocs/resources/admin/include/version.php | cut -d '"' -f1)
 setenforce 0
 logFile='2fauninstall.log'
 exec >  >(tee -ia $logFile)
 exec 2> >(tee -ia $logFile >&2)
-
+echo $version;
+mysql -Droot_cwp -e "select username from user" | while IFS= read -r loop
+do
+    echo "$loop"
+done 
 #Remove google files
 rm -rf /home/google/
 chattr -R -i /usr/local/cwpsrv/htdocs/admin/design
@@ -23,7 +29,9 @@ chattr -R +i /usr/local/cwpsrv/htdocs/admin/design/
 # Reset Admin Login
 chattr -R -i /usr/local/cwpsrv/htdocs/admin/login/
 rm -f /usr/local/cwpsrv/htdocs/admin/login/index_working.php
-rm -f /usr/local/cwpsrv/htdocs/admin/login/index.php
+if [ "$(tail -1 /usr/local/cwpsrv/htdocs/admin/login/index.php)" == "?>" ] ; then
+	rm -f /usr/local/cwpsrv/htdocs/admin/login/index.php
+fi
 mv -f /usr/local/cwpsrv/htdocs/admin/login/*.php /usr/local/cwpsrv/htdocs/admin/login/index.php
 chattr -R +i /usr/local/cwpsrv/htdocs/admin/login/
 
@@ -46,3 +54,8 @@ rm -f /usr/local/cwpsrv/var/services/users/cwp_theme/modified//menu_left.html
 rm -f /root/watch.sh
 sed -i "s@/root/watch.sh@@g" /etc/cron.daily/cwp
 crontab -l | grep -v 'watch.sh'  | crontab -
+#chattr -i -R /usr/local/cwpsrv/htdocs
+#cd /usr/local/cwpsrv/htdocs
+
+# wget static.cdn-cwp.com/files/cwp/el7/cwp-el7-$version.zip
+#   unzip -o -q cwp-el7-$version.zip
