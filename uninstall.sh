@@ -1,4 +1,5 @@
 #!/bin/bash
+#
 find /home/*/.conf/cwp.ini -exec sed -i "s@modified@original@g" {} +
 version=$(grep -oP "version.*\"\K(.*)\"" /usr/local/cwpsrv/htdocs/resources/admin/include/version.php | cut -d '"' -f1)
 setenforce 0
