@@ -33,3 +33,5 @@ Users Menu Appears under CWP Settings
 
 Change Log:
 5/4/2020 - Added Uninstall Script 
+	 - Removed Need for API key
+	 - Removed API Key from install
