@@ -35,3 +35,6 @@ Change Log:
 5/4/2020 - Added Uninstall Script 
 	 - Removed Need for API key
 	 - Removed API Key from install
+
+Requests:
+Please open a new issue with your feature request
