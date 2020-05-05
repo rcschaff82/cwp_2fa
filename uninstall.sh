@@ -54,7 +54,6 @@ rm -f /usr/local/cwpsrv/var/services/users/cwp_theme/modified//menu_left.html
 rm -f /root/watch.sh
 sed -i "s@/root/watch.sh@@g" /etc/cron.daily/cwp
 crontab -l | grep -v 'watch.sh'  | crontab -
-# JUST IN CASE
 #chattr -i -R /usr/local/cwpsrv/htdocs
 #cd /usr/local/cwpsrv/htdocs
 
