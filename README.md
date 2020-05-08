@@ -18,11 +18,6 @@ From root user via ssh:
 
 wget -O - https://raw.githubusercontent.com/rcschaff82/cwp_installers/master/cwp_2fa.install | bash
 
-cd rcschaff82-cwp_2fa-*
-
-./install.sh
-
-When prompted, put in your API key
 That's it. 
 
 Now log into CWP and you should see a new menu 2Factor Auth directly under Server Settings Menu
