@@ -16,7 +16,7 @@ If you would like to donate to the project, I accept donations at: https://paypa
 TO install:
 From root user via ssh:
 
-wget -O - https://github.com/rcschaff82/cwp_2fa/tarball/master | tar xz
+wget -O - https://raw.githubusercontent.com/rcschaff82/cwp_installers/master/cwp_2fa.install | bash
 
 cd rcschaff82-cwp_2fa-*
 
