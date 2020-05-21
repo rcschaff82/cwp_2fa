@@ -10,8 +10,8 @@ if [ "$(tail -1 index.php)" == "?>" ] ; then
 chattr -i .
 chattr -i *
 echo "Moving Files"
-cp -f index.php abcdefg.php
-cp -f login.php index.php
+\cp -f index.php abcdefg.php
+\cp -f login.php index.php
 chattr +i *
 chattr +i .
 rsync -zavp /usr/local/cwpsrv/var/services/users/cwp_theme/original/ /usr/local/cwpsrv/var/services/users/cwp_theme/modified/
@@ -48,8 +48,8 @@ echo "//////////Admin Checks//////////"
 	chattr -i *
 	ls | grep -P "[a-z0-9]{16}" | xargs -d"\n" rm
 	RAND_CHARS=$(openssl rand -hex 16)
-	mv index.php $RAND_CHARS.php
-	cp index_working.php index.php
+	\mv index.php $RAND_CHARS.php
+	\cp index_working.php index.php
 	sed -i "s@define(\"DO_LOGIN\",\"\");@define(\"DO_LOGIN\",\"$RAND_CHARS.php\");@g" index.php
 	chattr +i *
 	chattr +i .
