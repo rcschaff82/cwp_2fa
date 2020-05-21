@@ -22,6 +22,7 @@ echo "Install CWP 2FA Files"
 chattr -R -i /usr/local/cwpsrv/htdocs/admin/design
 cp -v admin/cwp2fa.php /usr/local/cwpsrv/htdocs/resources/admin/modules/
 cp -v admin/user2fa.php /usr/local/cwpsrv/htdocs/resources/admin/modules/
+cp -v update_class.php /usr/local/cwpsrv/htdocs/resources/admin/modules/
 cp -v admin/googleAuthenticator.php /usr/local/cwpsrv/htdocs/admin/design/
 cp -v admin/showQRCode.php /usr/local/cwpsrv/htdocs/admin/design/
 if ! grep -q "\-- cwp_2fa --" /usr/local/cwpsrv/htdocs/resources/admin/include/3rdparty.php
