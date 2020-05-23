@@ -3,7 +3,7 @@ class gitupdate {
 	public $url;
 	public $script;
 	public function __construct($user,$script) {
-		global $mysql_conn;
+		global $mysql_conn, $_POST;
 		$this->url =  "https://api.github.com/repos/$user/$script/commits";
 		$this->script = $script;
 		if( mysqli_num_rows(mysqli_query($mysql_conn,"SHOW TABLES LIKE '{$this->script}_settings' ")) == 0 ){		
@@ -14,6 +14,21 @@ class gitupdate {
 			)ENGINE=MyISAM DEFAULT CHARSET=utf8;";
 			mysqli_query($mysql_conn, $mi_table3);
 		}
+		if (isset($_POST['update']) && $_POST['update'] == 'update') {
+				$this->doupdate();
+		}
+	}
+	private function doupdate() {
+	global $_POST;
+	shell_exec("cd /usr/local/src/{$this->script} && git pull && ./install");
+	unset($_POST);
+	echo <<<EOF
+		<script>
+		if ( window.history.replaceState ) {
+			window.history.replaceState( null, null, window.location.href );
+		}
+		</script>
+EOF;
 	}
 	private function checkgit() {
 		$curl = curl_init();
@@ -32,65 +47,83 @@ class gitupdate {
 			return false;
 		}
 	}
+    private function updatemessage() {
+	$msg = "<div style='position:absolute; top:80px;' class='alert alert-info'><button type='button' class='close' data-dismiss='alert'>×</button>";
+	$msg .= "<h3>A New Version is available</h3><p>Please follow the directions:<br><code>cd /usr/local/src/$this->script<br>git update && ./install</code>";
+	$msg .= '<h3>A New Version is available</h3><p><form method="post" action="index.php?module='.$this->script.'" class="inline">
+ 		<button type="submit" name="update" value="update" class="link-button">Update Now!</button></form>';
+	$msg .= "</p></div>";
+	return $msg;
+	
+    }
+    private function setval($valname,$valval) {
+	global $mysql_conn;
+	if (mysqli_query($mysql_conn,"insert into {$this->script}_settings (varname, varval) values ('{$valname}','{$valval}') on duplicate key update varval='{$valval}'") or die(mysqli_error($mysql_conn))) return true;
+    }
+    private function readval($valname) {
+	global $mysql_conn;
+	$resp = mysqli_query($mysql_conn,"select varval from {$this->script}_settings where varname='{$valname}'") or die(mysqli_error($mysql_conn));
+	if (mysqli_num_rows($resp) > 0) {
+		list($var) = mysqli_fetch_row($resp);
+		//echo "Variable $var<br>";
+		return $var;
+	} else {
+		return false;
+	}
+    }
     public function checkupdate($force = "N") {
-		global $mysql_conn;
 		// need to check date last checked (varname, varval) $this->script_settings
-		$resp = mysqli_query($mysql_conn,"select varval from {$this->script}_settings where varname='lastcheck'");
-		$resp2 = mysqli_query($mysql_conn,"select varval from {$this->script}_settings where varname='sha'");
-		if (mysqli_num_rows($resp) > 0 && mysqli_num_rows($resp2) > 0) {
-			list($lastcheck) = mysqli_fetch_row($resp);
-			list($sha) = mysqli_fetch_row($resp2);
+		if ( ($lastcheck = $this->readval('lastcheck')) && ($sha = $this->readval('sha')) ) {
+			//echo "First: $lastcheck<br>";
 			if ($force != "N") {
 				$newsha = $this->checkgit();
 				if ($newsha === false) return false;
 				$date = date("Y-m-d H:i:s");
-				mysqli_query($mysql_conn,"insert into {$this->script}_settings (varname, varval) values ('sha','$newsha') on duplicate key update varval='$newsha'");
-				mysqli_query($mysql_conn,"insert into {$this->script}_settings (varname, varval) values ('lastcheck','$date') on duplicate key update varval='$date'");
+				$this->setval('sha',$newsha);
+				$this->setval('lastcheck',$date);
 				if ($sha != $newsha) {
-					echo "<div style='position:absolute; top:80px;' class='alert alert-info'><button type='button' class='close' data-dismiss='alert'>×</button>";
-					echo "<h3>A New Version is available</h3><p>Please follow the directions:<br><code>cd /usr/local/src/$this->script<br>git update && ./install</code>";
-					echo "</p></div>";
+					echo $this->updatemessage();
 				}
 				return true;
 			}
+			//echo "Test: $lastcheck $sha";
 			$start_date = new DateTime($lastcheck);
 			$since_start = $start_date->diff(new DateTime(date("Y-m-d H:i:s")));
 			if ($since_start->d >= 1) {
 				$newsha = $this->checkgit();
 				if ($newsha === false) return false;
 				$date = date("Y-m-d H:i:s");
-				mysqli_query($mysql_conn,"insert into {$this->script}_settings (varname, varval) values ('sha','$newsha') on duplicate key update varval='$newsha'") or die(mysqli_error($mysql_conn));
-				mysqli_query($mysql_conn,"insert into {$this->script}_settings (varname, varval) values ('lastcheck','$date') on duplicate key update varval='$date'") or die(mysqli_error($mysql_conn));;
+				$this->setval('sha',$newsha);
+                                $this->setval('lastcheck',$date);
 				if ($sha != $newsha) {
-					echo "<div style='position:absolute; top:80px;' class='alert alert-info'><button type='button' class='close' data-dismiss='alert'>×</button>";
-					echo "<h3>A New Version is available</h3><p>Please do the following:<br><code>cd /usr/local/src/$script<br>git update && ./install</code>";
-					echo "</p></div>";
+					echo $this->updatemessage();
 				}
 			}
-			/*echo $since_start->days.' days total<br>';
-			echo $since_start->y.' years<br>';
-			echo $since_start->m.' months<br>';
-			echo $since_start->d.' days<br>';
-			echo $since_start->h.' hours<br>';
-			echo $since_start->i.' minutes<br>';
-			echo $since_start->s.' seconds<br>';
-			echo "LC: " . $lastcheck . "<br>";
-			echo "Sha: " .$sha;*/
+			/*
+			 $since_start->days.' days total<br>';
+			 $since_start->y.' years<br>';
+			 $since_start->m.' months<br>';
+			 $since_start->d.' days<br>';
+			 $since_start->h.' hours<br>';
+			 $since_start->i.' minutes<br>';
+			 $since_start->s.' seconds<br>';
+			 "LC: " . $lastcheck . "<br>";
+			 "Sha: " .$sha;*/
 			
 		} 
 		else {
 			// No Response or table not created.  We do the first check and create it.
 			$sha = $this->checkgit();
-			if ($sha === false) return false;
 			$date = date("Y-m-d H:i:s");
-			mysqli_query($mysql_conn,"insert into {$this->script}_settings (varname, varval) values ('sha','$sha') on duplicate key update varval='$sha'");
-			mysqli_query($mysql_conn,"insert into {$this->script}_settings (varname, varval) values ('lastcheck','$date') on duplicate key update varval='$date'");
+			$this->setval('lastcheck',$date);
+			if ($sha === false) $sha="NA";
+			$this->setval('sha',$sha);
 		}
 		/**/
 	}
 }
 /*To Call
-include_once "gitupdate.php";
+include_once "update_class.php";
 $update = new gitupdate('rcschaff82','cwp_2fa');
 $force = (isset($_GET['forceupdate']))?'Y':'N';
 $update->checkupdate($force);
