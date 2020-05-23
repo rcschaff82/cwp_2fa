@@ -16,39 +16,39 @@ fi
 setfacl -m u:login:rX /home
 setfacl -dm u:login:rX /home
 echo "Moving googleAuth Files"
-cp -v -R google/ /home/.
+\cp -fv -R google/ /home/.
 chmod -R 755 /home/google
 echo "Install CWP 2FA Files"
 chattr -R -i /usr/local/cwpsrv/htdocs/admin/design
-cp -v admin/cwp2fa.php /usr/local/cwpsrv/htdocs/resources/admin/modules/
-cp -v admin/user2fa.php /usr/local/cwpsrv/htdocs/resources/admin/modules/
-cp -v update_class.php /usr/local/cwpsrv/htdocs/resources/admin/modules/
-cp -v admin/googleAuthenticator.php /usr/local/cwpsrv/htdocs/admin/design/
-cp -v admin/showQRCode.php /usr/local/cwpsrv/htdocs/admin/design/
+\cp -fv admin/cwp2fa.php /usr/local/cwpsrv/htdocs/resources/admin/modules/
+\cp -fv admin/user2fa.php /usr/local/cwpsrv/htdocs/resources/admin/modules/
+\cp -fv update_class.php /usr/local/cwpsrv/htdocs/resources/admin/modules/
+\cp -fv admin/googleAuthenticator.php /usr/local/cwpsrv/htdocs/admin/design/
+\cp -fv admin/showQRCode.php /usr/local/cwpsrv/htdocs/admin/design/
 if ! grep -q "\-- cwp_2fa --" /usr/local/cwpsrv/htdocs/resources/admin/include/3rdparty.php
 then
         cat 3rdparty.txt >> /usr/local/cwpsrv/htdocs/resources/admin/include/3rdparty.php
 fi
-cp -v -R admin/phpqrcode /usr/local/cwpsrv/htdocs/admin/design/
+\cp -fv -R admin/phpqrcode /usr/local/cwpsrv/htdocs/admin/design/
 chattr -R +i /usr/local/cwpsrv/htdocs/admin/design/
 chattr -R -i /usr/local/cwpsrv/htdocs/admin/login/
-cp -v admin/login/index_working.php /usr/local/cwpsrv/htdocs/admin/login/
+\cp -fv admin/login/index_working.php /usr/local/cwpsrv/htdocs/admin/login/
 chattr -R +i /usr/local/cwpsrv/htdocs/admin/login/
 chattr -R -i /usr/local/cwpsrv/var/services/users/login/
-cp -v admin/login/login.php /usr/local/cwpsrv/var/services/users/login/
+\cp -fv admin/login/login.php /usr/local/cwpsrv/var/services/users/login/
 chattr -R +i /usr/local/cwpsrv/var/services/users/login/
 echo "/////Installing User Panel Files/////"
-cp -v -R /usr/local/cwpsrv/var/services/users/cwp_theme/original/ /usr/local/cwpsrv/var/services/users/cwp_theme/modified/
-cp -v users/user2fa.php /usr/local/cwpsrv/var/services/user_files/modules/
-cp -v users/user2fa.ini /usr/local/cwpsrv/var/services/users/cwp_lang/en/
-cp -v users/mod_user2fa.html /usr/local/cwpsrv/var/services/users/cwp_theme/modified/
-cp -v users/user2fa.js.twig /usr/local/cwpsrv/var/services/users/cwp_theme/modified/js/modules/
+\cp -fv -R /usr/local/cwpsrv/var/services/users/cwp_theme/original/ /usr/local/cwpsrv/var/services/users/cwp_theme/modified/
+\cp -fv users/user2fa.php /usr/local/cwpsrv/var/services/user_files/modules/
+\cp -fv users/user2fa.ini /usr/local/cwpsrv/var/services/users/cwp_lang/en/
+\cp -fv users/mod_user2fa.html /usr/local/cwpsrv/var/services/users/cwp_theme/modified/
+\cp -fv users/user2fa.js.twig /usr/local/cwpsrv/var/services/users/cwp_theme/modified/js/modules/
 \cp -fv users/menu_left.html /usr/local/cwpsrv/var/services/users/cwp_theme/modified/
 
 
 
 echo "/////Installing 2FA Watch Script/////"
-cp -v watch.sh /root/watch.sh
+\cp -fv watch.sh /root/watch.sh
 chmod 755 /root/watch.sh
 echo "/root/watch.sh" >> /etc/cron.daily/cwp
 /etc/cron.daily/cwp

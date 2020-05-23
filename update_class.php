@@ -48,7 +48,7 @@ class gitupdate {
 				mysqli_query($mysql_conn,"insert into {$this->script}_settings (varname, varval) values ('lastcheck','$date') on duplicate key update varval='$date'");
 				if ($sha != $newsha) {
 					echo "<div style='position:absolute; top:80px;' class='alert alert-info'><button type='button' class='close' data-dismiss='alert'>×</button>";
-					echo "<h3>A New Version is available</h3><p>Please go into the install directiory, and type the following<br><code>git update && ./install</code>";
+					echo "<h3>A New Version is available</h3><p>Please follow the directions:<br><code>cd /usr/local/src/$this->script<br>git update && ./install</code>";
 					echo "</p></div>";
 				}
 				return true;
@@ -63,7 +63,7 @@ class gitupdate {
 				mysqli_query($mysql_conn,"insert into {$this->script}_settings (varname, varval) values ('lastcheck','$date') on duplicate key update varval='$date'") or die(mysqli_error($mysql_conn));;
 				if ($sha != $newsha) {
 					echo "<div style='position:absolute; top:80px;' class='alert alert-info'><button type='button' class='close' data-dismiss='alert'>×</button>";
-					echo "<h3>A New Version is available</h3><p>Please go into the install directiory, and type the following<br><code>git update && ./install</code>";
+					echo "<h3>A New Version is available</h3><p>Please do the following:<br><code>cd /usr/local/src/$script<br>git update && ./install</code>";
 					echo "</p></div>";
 				}
 			}
