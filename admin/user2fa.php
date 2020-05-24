@@ -5,6 +5,7 @@
 $sql="select username from user";
 $resp=mysqli_query($mysql_conn,$sql);
 $servers = array();
+if (mysqli_num_rows($resp) > 0) {
 while($row = mysqli_fetch_assoc($resp)) {
 //$servers[$row['port']] = array("port"=>$row['port'], "user"=>$row['user'],"conf"=>$row['config']);
 $users[] = $row['username']  ."\n";
@@ -54,10 +55,15 @@ $disabled = ($var[1] == true)?"disabled=disabled":"";  // Disable the button if 
 $active = $var[0];
 echo "<tr><td>".$user . "</td><td><form method='post'><input type=hidden name=onoff value={$active}><input type=hidden name=user value={$user}><button $disabled class='btn btn-primary' type='submit' name='submit' value='{$active}'><span style='color:white' class='fa fa-lock'></span>{$active}</button></form><br></td></tr>\n";
 }
+?> </tbody></table> 
+<?php 
+} else {
+echo "<h4>No Users in database</h4>";
+}
 ?>
-</tbody></table>
-<script>
+<script> 
 if ( window.history.replaceState ) {
-  window.history.replaceState( null, null, window.location.href );
+	window.history.replaceState( null, null, window.location.href );
 }
 </script>
+?>
