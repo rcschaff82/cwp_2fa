@@ -20,7 +20,7 @@ class gitupdate {
 	}
 	private function doupdate() {
 	global $_POST;
-	shell_exec("cd /usr/local/src/{$this->script} && git pull && ./install");
+	shell_exec("cd /usr/local/src/{$this->script} && git pull && ./install.sh");
 	unset($_POST);
 	echo <<<EOF
 		<script>
@@ -49,7 +49,7 @@ EOF;
 	}
     private function updatemessage() {
 	$msg = "<div style='position:absolute; top:80px;' class='alert alert-info'><button type='button' class='close' data-dismiss='alert'>×</button>";
-	$msg .= "<h3>A New Version is available</h3><p>Please follow the directions:<br><code>cd /usr/local/src/$this->script<br>git update && ./install</code>";
+	$msg .= "<h3>A New Version is available</h3><p>Please follow the directions:<br><code>cd /usr/local/src/$this->script<br>git pull && ./install.sh</code>";
 	$msg .= '<h3>A New Version is available</h3><p><form method="post" action="index.php?module='.$this->script.'" class="inline">
  		<button type="submit" name="update" value="update" class="link-button">Update Now!</button></form>';
 	$msg .= "</p></div>";
