@@ -2,10 +2,11 @@
 class gitupdate {
 	public $url;
 	public $script;
-	public function __construct($user,$script) {
+	public function __construct($user,$script, $modname) {
 		global $mysql_conn, $_POST;
 		$this->url =  "https://api.github.com/repos/$user/$script/commits";
 		$this->script = $script;
+		$this->modname = $modname;
 		if( mysqli_num_rows(mysqli_query($mysql_conn,"SHOW TABLES LIKE '{$this->script}_settings' ")) == 0 ){		
 			$mi_table3= "CREATE TABLE {$this->script}_settings(
 			varname VARCHAR(65) NOT NULL UNIQUE,
@@ -23,6 +24,7 @@ class gitupdate {
 	shell_exec("cd /usr/local/src/{$this->script} && git pull && ./install.sh");
 	unset($_POST);
 	echo <<<EOF
+		<h3>Script Updated.  Please Refresh.</h3>
 		<script>
 		if ( window.history.replaceState ) {
 			window.history.replaceState( null, null, window.location.href );
@@ -50,7 +52,7 @@ EOF;
     private function updatemessage() {
 	$msg = "<div style='position:absolute; top:80px;' class='alert alert-info'><button type='button' class='close' data-dismiss='alert'>×</button>";
 	$msg .= "<h3>A New Version is available</h3><p>Please follow the directions:<br><code>cd /usr/local/src/$this->script<br>git pull && ./install.sh</code>";
-	$msg .= '<h3>A New Version is available</h3><p><form method="post" action="index.php?module='.$this->script.'" class="inline">
+	$msg .= '<h3>A New Version is available</h3><p><form method="post" action="index.php?module='.$this->modname.'" class="inline">
  		<button type="submit" name="update" value="update" class="link-button">Update Now!</button></form>';
 	$msg .= "</p></div>";
 	return $msg;
@@ -124,7 +126,7 @@ EOF;
 }
 /*To Call
 include_once "update_class.php";
-$update = new gitupdate('rcschaff82','cwp_2fa');
+$update = new gitupdate('rcschaff82','cwp_2fa','cwp2fa');
 $force = (isset($_GET['forceupdate']))?'Y':'N';
 $update->checkupdate($force);
 */
