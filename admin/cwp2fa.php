@@ -184,7 +184,7 @@ if (isset($overlay)) {
         echo"</div></span></div>";
 }
 include_once "update_class.php";
-$update = new gitupdate('rcschaff82','cwp_2fa','cwp_2fa');
+$update = new gitupdate('rcschaff82','cwp_2fa','cwp2fa');
 $force = (isset($_GET['forceupdate']))?'Y':'N';
 $update->checkupdate($force);
 ?>
