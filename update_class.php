@@ -21,7 +21,7 @@ class gitupdate {
 	}
 	private function doupdate() {
 	global $_POST;
-	shell_exec("cd /usr/local/src/{$this->script} && git pull && ./install.sh");
+	shell_exec("cd /usr/local/src/{$this->script} && git pull && ./install.sh &");
 	unset($_POST);
 	echo <<<EOF
 		<h3>Script Updated.  Please Refresh.</h3>
