@@ -2,7 +2,8 @@
 class gitupdate {
 	public $url;
 	public $script;
-	public function __construct($user,$script, $modname) {
+	public $modname;
+	public function __construct($user,$script,$modname) {
 		global $mysql_conn, $_POST;
 		$this->url =  "https://api.github.com/repos/$user/$script/commits";
 		$this->script = $script;
@@ -21,10 +22,10 @@ class gitupdate {
 	}
 	private function doupdate() {
 	global $_POST;
-	shell_exec("cd /usr/local/src/{$this->script} && git pull && ./install.sh &");
+	$ps = shell_exec("(cd /usr/local/src/{$this->script} && git pull && ./install.sh) > /dev/null 2>&1 &");
 	unset($_POST);
 	echo <<<EOF
-		<h3>Script Updated.  Please Refresh.</h3>
+		Please wait.  Updating...
 		<script>
 		if ( window.history.replaceState ) {
 			window.history.replaceState( null, null, window.location.href );
