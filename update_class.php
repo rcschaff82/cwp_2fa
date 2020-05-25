@@ -90,11 +90,11 @@ EOF;
 				$newsha = $this->checkgit();
 				if ($newsha === false) return false;
 				$date = date("Y-m-d H:i:s");
-				$this->setval('sha',$newsha);
 				$this->setval('lastcheck',$date);
 				if ($sha != $newsha) {
 					echo $this->updatemessage();
 				}
+				$this->setval('sha',$newsha);
 				return true;
 			}
 			//echo "Test: $lastcheck $sha";
