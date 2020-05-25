@@ -20,18 +20,26 @@ class gitupdate {
 				$this->doupdate();
 		}
 	}
+	private function is_process_running($pid)
+        {
+                exec("ps $PID", $ProcessState);
+                return(count($ProcessState) >= 2);
+        }
 	private function doupdate() {
 	global $_POST;
 	$ps = shell_exec("(cd /usr/local/src/{$this->script} && git pull && ./install.sh) > /dev/null 2>&1 &");
+	
 	unset($_POST);
 	echo <<<EOF
 		Please wait.  Updating...
+
 		<script>
 		if ( window.history.replaceState ) {
 			window.history.replaceState( null, null, window.location.href );
 		}
 		</script>
 EOF;
+	echo "Done.  Please Refresh.";
 	}
 	private function checkgit() {
 		$curl = curl_init();
