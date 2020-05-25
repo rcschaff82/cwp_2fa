@@ -31,15 +31,13 @@ class gitupdate {
 	
 	unset($_POST);
 	echo <<<EOF
-		Please wait.  Updating...
-
+		Update Running in the background. Please wait about 2 minutes then refresh.
 		<script>
 		if ( window.history.replaceState ) {
 			window.history.replaceState( null, null, window.location.href );
 		}
 		</script>
 EOF;
-	echo "Done.  Please Refresh.";
 	}
 	private function checkgit() {
 		$curl = curl_init();
