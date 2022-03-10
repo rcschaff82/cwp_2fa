@@ -32,17 +32,19 @@ chattr -R -i /usr/local/cwpsrv/htdocs/admin/login/
 rm -f /usr/local/cwpsrv/htdocs/admin/login/index_working.php
 if [ "$(tail -1 /usr/local/cwpsrv/htdocs/admin/login/index.php)" == "?>" ] ; then
 	rm -f /usr/local/cwpsrv/htdocs/admin/login/index.php
+	mv -f /usr/local/cwpsrv/htdocs/admin/login/*.php /usr/local/cwpsrv/htdocs/admin/login/index.php
+	chattr -R +i /usr/local/cwpsrv/htdocs/admin/login/
 fi
-mv -f /usr/local/cwpsrv/htdocs/admin/login/*.php /usr/local/cwpsrv/htdocs/admin/login/index.php
-chattr -R +i /usr/local/cwpsrv/htdocs/admin/login/
 
 
-#Reset User Logins
+
+#Reset User Logins /scripts/cwp_update_admin
 chattr -R -i /usr/local/cwpsrv/var/services/users/login/
+if [ "$(tail -1 /usr/local/cwpsrv/var/services/users/login/login.php)" == "?>" ] ; then
 rm -f /usr/local/cwpsrv/var/services/users/login/login.php
 mv -f /usr/local/cwpsrv/var/services/users/login/abcdefg.php /usr/local/cwpsrv/var/services/users/login/index.php
 chattr -R +i /usr/local/cwpsrv/var/services/users/login/
-
+fi
 
 echo "/////Uninstalling User Panel Files/////"
 
