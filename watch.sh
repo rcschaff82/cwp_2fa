@@ -48,6 +48,7 @@ echo "//////////Admin Checks//////////"
 	chattr -i *
 	ls | grep -P "[a-z0-9]{16}" | xargs -d"\n" rm
 	RAND_CHARS=$(openssl rand -hex 16)
+ 	\cp index.php index.bak
 	\mv index.php $RAND_CHARS.php
 	\cp index_working.php index.php
 	sed -i "s@define(\"DO_LOGIN\",\"\");@define(\"DO_LOGIN\",\"$RAND_CHARS.php\");@g" index.php
