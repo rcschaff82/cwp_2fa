@@ -1,6 +1,9 @@
 # cwp_2fa
 CentOS Control Panel 2fa module
 
+
+***This module is depreciated as CWP has included 2FA in their project. ***
+
 I have built a Two Factor Authorization Module for CWP.  I have tested it, but please consider this is BETA.   All Issues should be reported to me on this post.
 
 Pre-Requisites.
